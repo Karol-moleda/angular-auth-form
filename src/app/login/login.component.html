@@ -15,12 +15,15 @@
 
     <mat-form-field appearance="fill" *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid">
       <mat-label>Potwierdź swój e-mail</mat-label>
-      <input matInput formControlName="patternEmail'" type="email">
+      <input matInput formControlName="patternEmail" type="email">
       <mat-error *ngIf="loginForm.get('patternEmail')?.errors?.['required']">
         Email is required
       </mat-error>
       <mat-error *ngIf="loginForm.get('patternEmail')?.errors?.['invalidEmail']">
         Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('patternEmail')?.errors?.['emailMismatch']">
+        Emails do not match
       </mat-error>
     </mat-form-field>
 
