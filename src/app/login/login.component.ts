@@ -1,40 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CustomValidators } from '../validators/custom-validators'; // Import custom validators
+import { FormErrorComponent } from "./components/form-error/form-error.component";
+
+function emailValidator(control: AbstractControl): {[key: string]: any} | null {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const valid = emailPattern.test(control.value);
+  return valid ? null : { 'invalidEmail': true };
+}
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    MatButtonModule, 
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
-  ],
+    MatInputModule,
+    FormErrorComponent
+],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]], 
-      patternEmail: ['', [Validators.required, CustomValidators.emailPattern, CustomValidators.emailMatch('email')]], 
-      password: ['', Validators.required]
+      email: ['', [Validators.required, emailValidator]],
+      password: ['', Validators.required],
+      patternEmail:['', Validators.required],
     });
   }
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
     }
