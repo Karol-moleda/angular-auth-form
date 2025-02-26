@@ -1,27 +1,38 @@
 <div class="login-container">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container__form">
     <h2 class="login-container__title">Zaloguj się</h2>
-    
+
     <mat-form-field appearance="fill">
       <mat-label>Adres Email</mat-label>
-      <input matInput formControlName="email" type="email" >
+      <input matInput formControlName="email" type="email" />
     </mat-form-field>
     <app-form-error [control]="loginForm.get('email')"></app-form-error>
 
-    <mat-form-field appearance="fill" *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid">
+    <mat-form-field
+      appearance="fill"
+      *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid"
+    >
       <mat-label>Potwierdź swój e-mail</mat-label>
-      <input matInput formControlName="patternEmail" type="email" >
+      <input matInput formControlName="patternEmail" type="email" />
     </mat-form-field>
-    <app-form-error *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid"
-                   [control]="loginForm.get('patternEmail')"></app-form-error>
+    <app-form-error
+      *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid"
+      [control]="loginForm.get('patternEmail')"
+    ></app-form-error>
 
     <mat-form-field appearance="fill">
       <mat-label>Hasło</mat-label>
-      <input matInput formControlName="password" type="password">
+      <input matInput formControlName="password" type="password" />
     </mat-form-field>
     <app-form-error [control]="loginForm.get('password')"></app-form-error>
 
-    <button class="login-container__button"  mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+    <button
+      class="login-container__button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
       Login
     </button>
   </form>
