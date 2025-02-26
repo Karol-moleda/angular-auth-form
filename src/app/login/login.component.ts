@@ -32,6 +32,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Check if already authenticated
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       patternEmail: ['', [Validators.required, Validators.email]],

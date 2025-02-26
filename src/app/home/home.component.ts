@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
     // If not logged in, redirect to login page
     if (!this.isLoggedIn) {
       this.router.navigate(['/login']);
+      return;
     }
   }
 
