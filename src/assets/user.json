@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "firstName": "Karol",
+  "lastName": "Molęda",
+  "email": "karol.moleda90@gmail.com",
+  "role": "Administrator",
+  "avatar": "assets/photo.jpg",
+  "company": "AppVerk Sp. z o.o.",
+  "department": "IT Development",
+  "position": "Frontend Developer",
+  "address": {
+    "street": "ul. Żeronmskiego",
+    "city": "Olkusz",
+    "zipCode": "32-300",
+    "country": "Polska"
+  },
+  "phone": "+48 508257011",
+  "skills": ["Angular", "TypeScript", "JavaScript", "HTML", "CSS", "RxJS", "REACT"],
+  "preferences": {
+    "theme": "dark",
+    "notifications": true,
+    "language": "pl"
+  }
+}
