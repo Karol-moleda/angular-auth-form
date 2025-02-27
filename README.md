@@ -17,19 +17,25 @@ A robust authentication system built with Angular that features custom form cont
 src/
 ├── app/
 │   ├── components/
-│   │   ├── login/
-│   │   └── home/
-│   ├── shared/
-│   │   └── custom-input/
+│   │   └── form-error/
+│   │   └── language-selector/
 │   ├── guards/
 │   │   ├── auth.guard.ts
-│   │   └── login.guard.ts
+│   ├── models/
+│   │   ├── user.interface.ts
+│   ├── pages/
+│   │   ├── login/
+│   │   └── home/
+│   │   └── welcome/
 │   ├── validators/
 │   │   └── email-validator.ts
 │   └── services/
 │       └── auth.service.ts
+│       └── language.service.ts
 └── assets/
-    └── user-data.json
+│   └── i18n/
+│   └── styles/
+    └── user.json
 ```
 
 ## Installation

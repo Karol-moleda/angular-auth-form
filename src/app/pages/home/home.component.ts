@@ -39,12 +39,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
-  // Dependency injection using inject function
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
 
-  // State management with signals
   userData = signal<User | null>(null);
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);

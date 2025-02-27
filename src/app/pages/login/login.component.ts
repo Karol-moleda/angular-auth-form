@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,20 +23,17 @@ import { LanguageSelectorComponent } from '../../components/language-selector/la
     FormErrorComponent,
     TranslateModule,
     LanguageSelectorComponent
-],
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   ngOnInit(): void {
-    // Check if already authenticated
     const token = localStorage.getItem('authToken');
     if (token) {
       this.router.navigate(['/home']);
@@ -50,6 +47,7 @@ export class LoginComponent implements OnInit {
     }, {
       validators: this.matchEmails('email', 'patternEmail')
     });
+
   }
 
   matchEmails(email: string, confirmEmail: string) {
@@ -71,11 +69,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      // Generate and store token
       const token = this.generateRandomToken();
       localStorage.setItem('authToken', token);
       
-      // Redirect to home page - updated path
       this.router.navigate(['/home']);
     }
   }
@@ -85,7 +81,6 @@ export class LoginComponent implements OnInit {
    * @returns Random string token
    */
   private generateRandomToken(): string {
-    // Generate a random string of 32 characters
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let token = '';
     

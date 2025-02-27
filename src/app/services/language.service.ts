@@ -15,13 +15,11 @@ export class LanguageService {
   ];
 
   constructor(private translate: TranslateService) {
-    // Initialize from localStorage if available
     const savedLang = localStorage.getItem('preferredLanguage');
     
     if (savedLang && this.isValidLanguage(savedLang)) {
       this.setLanguage(savedLang);
     } else {
-      // Use browser language or default to Polish
       const browserLang = translate.getBrowserLang();
       const defaultLang = browserLang && this.isValidLanguage(browserLang) ? browserLang : 'pl';
       this.setLanguage(defaultLang);

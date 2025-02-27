@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-welcome',
   imports: [MatButtonModule, MatIconModule],
   templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.css',
+  styleUrl: './welcome.component.scss',
   standalone: true
 })
 export class WelcomeComponent {
