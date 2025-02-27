@@ -5,10 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormErrorComponent } from "./components/form-error/form-error.component";
+import { FormErrorComponent } from "../../components/form-error/form-error.component";
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
+import { LanguageSelectorComponent } from '../../components/language-selector/language-selector.component';
 
 @Component({
   selector: 'app-login',

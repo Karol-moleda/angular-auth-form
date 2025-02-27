@@ -10,10 +10,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.interface';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.interface';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
+import { LanguageSelectorComponent } from '../../components/language-selector/language-selector.component';
 import { EMPTY, catchError, finalize } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
