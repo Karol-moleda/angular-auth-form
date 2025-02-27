@@ -1,13 +1,17 @@
+@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/mixins' as *;
+
 .home {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
+  background-color: $primary;
 
   &__header {
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: $shadow-medium;
+    background-color: $primary-dark;
   }
 
   &__spacer {
@@ -15,55 +19,54 @@
   }
 
   &__logout-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    @include button-base;
+    gap: $spacing-xxs;
+    color: $white;
   }
 
   &__content {
-    padding: 24px;
+    padding: $spacing-lg;
     flex-grow: 1;
-    background-color: #f5f5f5;
+    background-color: $primary;
   }
 
   &__loading {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     align-items: center;
     justify-content: center;
     height: 200px;
     
     &-text {
-      margin-top: 16px;
-      color: #555;
+      margin-top: $spacing-sm;
+      color: $white;
+      font-weight: $font-weight-medium;
     }
   }
 
   &__error-card {
-    margin-bottom: 20px;
-    background-color: #fff3f0;
+    margin-bottom: $spacing-md;
+    @include error-container;
   }
   
   &__error-container {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     align-items: center;
-    padding: 20px;
+    padding: $spacing-md;
     text-align: center;
   }
   
   &__error-icon {
-    color: #f44336;
+    color: $error;
     font-size: 40px;
     height: 40px;
     width: 40px;
-    margin-bottom: 16px;
+    margin-bottom: $spacing-sm;
   }
   
   &__error-message {
-    margin-bottom: 16px;
-    font-size: 16px;
-    color: #555;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-base;
+    color: $text-medium;
   }
 
   &__retry-button {
@@ -72,42 +75,41 @@
 
   &__user-profile {
     display: grid;
-    gap: 24px;
+    gap: $spacing-lg;
   }
 
   &__card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
+    @include card;
   }
   
   &__card-title {
-    font-size: 20px;
-    font-weight: 500;
-    color: #333;
+    font-size: $font-size-xlarge;
+    font-weight: $font-weight-medium;
+    color: $text-dark;
   }
 
   &__welcome-card {
-    animation: fadeIn 0.6s ease-in-out;
+    @include card-with-accent;
+    @include fadeIn;
   }
 
   &__welcome-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: $spacing-md;
   }
 
   &__avatar-container {
-    margin-right: 20px;
+    margin-right: $spacing-md;
   }
   
   &__avatar {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    border-radius: $border-radius-circle;
     object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid $primary;
+    box-shadow: $shadow-medium;
   }
   
   &__welcome-text {
@@ -116,118 +118,103 @@
   
   &__welcome-title {
     margin: 0;
-    font-size: 28px;
-    color: #333;
+    font-size: $font-size-xxlarge;
+    color: $text-dark;
   }
   
   &__role-badge {
-    display: inline-flex;
-    align-items: center;
-    background-color: #e3f2fd;
-    padding: 4px 12px;
-    border-radius: 16px;
-    margin-top: 8px;
+    @include badge;
+    background-color: $primary-light;
+    margin-top: $spacing-xxs;
   }
   
   &__role-icon {
-    font-size: 16px;
-    height: 16px;
-    width: 16px;
-    margin-right: 8px;
-    color: #1976d2;
+    font-size: $font-size-small;
+    height: $font-size-small;
+    width: $font-size-small;
+    margin-right: $spacing-xxs;
+    color: $primary-dark;
   }
   
   &__role-text {
-    color: #1976d2;
-    font-weight: 500;
+    color: $primary-dark;
+    font-weight: $font-weight-medium;
   }
   
   &__auth-info {
-    display: flex;
-    align-items: center;
-    background-color: rgba(76, 175, 80, 0.1);
-    padding: 12px;
-    border-radius: 4px;
-    margin-top: 8px;
+    @include info-box;
+    background-color: $primary-very-light;
+    border-left: 3px solid $primary;
   }
   
   &__secure-icon {
-    color: #4caf50;
-    margin-right: 12px;
+    color: $primary-dark;
+    margin-right: $spacing-xs;
   }
   
   &__auth-text {
-    color: #388e3c;
-    font-weight: 500;
+    color: $primary-darker;
+    font-weight: $font-weight-medium;
   }
 
   &__details-card {
-    padding-bottom: 16px;
+    @include card-with-accent;
+    padding-bottom: $spacing-sm;
   }
 
   &__section-title {
-    font-size: 18px;
-    color: #333;
-    margin: 16px 0 12px;
+    @include section-title;
   }
   
   &__details-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-    margin-bottom: 16px;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
   }
   
   &__detail-item {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
   }
   
   &__detail-label {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 4px;
+    @include label-text;
   }
   
   &__detail-value {
-    font-size: 16px;
-    color: #333;
+    @include value-text;
   }
   
   &__divider {
-    margin: 20px 0;
+    margin: $spacing-md 0;
+    background-color: $primary-border;
   }
   
   &__address {
-    margin: 16px 0;
+    margin: $spacing-sm 0;
     
     &-line {
-      margin: 4px 0;
-      font-size: 15px;
-      color: #333;
+      margin: $spacing-xxxs 0;
+      font-size: $font-size-medium;
+      color: $text-dark;
     }
   }
   
   &__skills {
-    margin: 16px 0;
+    margin: $spacing-sm 0;
   }
   
   &__skill-chip {
-    margin: 0 4px 4px 0;
-    background-color: #e1f5fe !important;
-    color: #0277bd !important;
+    margin: 0 $spacing-xxxs $spacing-xxxs 0;
+    background-color: $primary-light !important;
+    color: $primary-darker !important;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@media (max-width: 768px) {
+@include respond-to(md) {
   .home {
     &__content {
-      padding: 16px;
+      padding: $spacing-sm;
     }
     
     &__welcome-header {
@@ -237,7 +224,7 @@
     
     &__avatar-container {
       margin-right: 0;
-      margin-bottom: 16px;
+      margin-bottom: $spacing-sm;
     }
     
     &__details-grid {

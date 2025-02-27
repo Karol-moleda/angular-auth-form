@@ -1,0 +1,120 @@
+@use './variables' as *;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin card {
+  box-shadow: $shadow-large;
+  border-radius: $border-radius-medium;
+  overflow: hidden;
+  background-color: $white;
+  border: none;
+}
+
+@mixin card-with-accent($color: $primary-dark) {
+  @include card;
+  border-top: 4px solid $color;
+}
+
+@mixin section-title {
+  font-size: $font-size-large;
+  font-weight: $font-weight-medium;
+  color: $text-dark;
+  margin: $spacing-sm 0 $spacing-xs;
+  padding-bottom: $spacing-xxxs;
+  border-bottom: 2px solid $primary-border;
+}
+
+@mixin badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xxxs $spacing-xs;
+  border-radius: $border-radius-large;
+  font-weight: $font-weight-medium;
+}
+
+@mixin info-box {
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs;
+  border-radius: $border-radius-small;
+  margin-top: $spacing-xxs;
+}
+
+@mixin button-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xxs $spacing-sm;
+  border-radius: $border-radius-small;
+  font-weight: $font-weight-medium;
+  transition: background-color $transition-quick;
+}
+
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin label-text {
+  font-size: $font-size-small;
+  color: $text-light;
+  margin-bottom: $spacing-xxxs;
+}
+
+@mixin value-text {
+  font-size: $font-size-base;
+  color: $text-dark;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: $breakpoint-xl) { @content; }
+  }
+}
+
+@mixin fadeIn {
+  animation: fadeIn $transition-slow;
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@mixin error-message {
+  color: $error;
+  font-size: $font-size-small;
+  margin-top: $spacing-xxxs;
+}
+
+@mixin error-container {
+  background-color: $error-bg;
+  border-left: 4px solid $error;
+}
+
+@mixin success-indicator {
+  color: $success;
+  background-color: $success-bg;
+}
