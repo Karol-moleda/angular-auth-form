@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LanguageService {
   private currentLangSubject = new BehaviorSubject<string>('pl');
@@ -11,12 +11,12 @@ export class LanguageService {
 
   private availableLangs = [
     { code: 'pl', name: 'Polski' },
-    { code: 'en', name: 'English' }
+    { code: 'en', name: 'English' },
   ];
 
   constructor(private translate: TranslateService) {
     const savedLang = localStorage.getItem('preferredLanguage');
-    
+
     if (savedLang && this.isValidLanguage(savedLang)) {
       this.setLanguage(savedLang);
     } else {

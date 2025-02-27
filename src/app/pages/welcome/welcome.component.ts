@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   imports: [MatButtonModule, MatIconModule],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss',
-  standalone: true
+  standalone: true,
 })
 export class WelcomeComponent {
   constructor(private router: Router) {}
@@ -16,5 +16,4 @@ export class WelcomeComponent {
   onLogin() {
     this.router.navigate(['/login']);
   }
-
 }

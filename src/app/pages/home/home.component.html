@@ -45,7 +45,7 @@
               }
               <div class="home__welcome-text">
                 <h1 class="home__welcome-title">
-                  {{ 'HOME.WELCOME' | translate:{ name: userData()?.firstName } }}
+                  {{ 'HOME.WELCOME' | translate: { name: userData()?.firstName } }}
                 </h1>
                 <div class="home__role-badge">
                   <mat-icon class="home__role-icon">badge</mat-icon>
@@ -63,13 +63,17 @@
 
         <mat-card class="home__card home__details-card">
           <mat-card-header>
-            <mat-card-title class="home__card-title">{{ 'HOME.PERSONAL_DATA' | translate }}</mat-card-title>
+            <mat-card-title class="home__card-title">{{
+              'HOME.PERSONAL_DATA' | translate
+            }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <div class="home__details-grid">
               <div class="home__detail-item">
                 <span class="home__detail-label">{{ 'HOME.FULL_NAME' | translate }}</span>
-                <span class="home__detail-value">{{ userData()?.firstName }} {{ userData()?.lastName }}</span>
+                <span class="home__detail-value"
+                  >{{ userData()?.firstName }} {{ userData()?.lastName }}</span
+                >
               </div>
 
               <div class="home__detail-item">
@@ -117,10 +121,7 @@
             <div class="home__skills">
               <mat-chip-set>
                 @for (skill of userData()?.skills ?? []; track skill) {
-                  <mat-chip
-                    matTooltip="Skill: {{ skill }}"
-                    class="home__skill-chip"
-                  >
+                  <mat-chip matTooltip="Skill: {{ skill }}" class="home__skill-chip">
                     {{ skill }}
                   </mat-chip>
                 } @empty {

@@ -1,4 +1,11 @@
-import { Component, OnInit, inject, signal, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+  DestroyRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,15 +42,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       }
     </mat-menu>
   `,
-  styles: [`
-    .lang-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 36px;
-      line-height: 36px;
-    }
-  `]
+  styles: [
+    `
+      .lang-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 36px;
+        line-height: 36px;
+      }
+    `,
+  ],
 })
 export class LanguageSelectorComponent implements OnInit {
   private languageService = inject(LanguageService);
@@ -56,9 +65,7 @@ export class LanguageSelectorComponent implements OnInit {
     this.currentLang.set(this.languageService.getCurrentLang());
     this.availableLanguages.set(this.languageService.getAvailableLanguages());
 
-    this.languageService.currentLang$.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(lang => {
+    this.languageService.currentLang$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(lang => {
       this.currentLang.set(lang);
     });
   }

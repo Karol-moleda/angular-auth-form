@@ -1,4 +1,11 @@
-import { Component, OnInit, signal, inject, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+  DestroyRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,11 +39,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatChipsModule,
     MatTooltipModule,
     TranslateModule,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   private readonly router = inject(Router);
@@ -54,8 +61,9 @@ export class HomeComponent implements OnInit {
   loadUserData(): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
-    
-    this.userService.getUserData()
+
+    this.userService
+      .getUserData()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         catchError(error => {
@@ -63,7 +71,7 @@ export class HomeComponent implements OnInit {
           this.errorMessage.set(error.message || 'An unexpected error occurred');
           return EMPTY;
         }),
-        finalize(() => this.isLoading.set(false))
+        finalize(() => this.isLoading.set(false)),
       )
       .subscribe(data => {
         this.userData.set(data);
@@ -74,5 +82,4 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
   }
-
 }
