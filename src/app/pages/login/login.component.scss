@@ -34,4 +34,12 @@
     @include button-base;
     height: 48px;
   }
+
+  .error-message {
+    color: $error;
+    font-size: 12px;
+    margin-top: -16px;
+    margin-bottom: 8px;
+    display: block;
+  }
 }

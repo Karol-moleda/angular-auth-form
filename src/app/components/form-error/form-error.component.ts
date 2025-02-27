@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,11 +11,12 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './form-error.component.html',
   styleUrls: ['./form-error.component.scss']
 })
-export class FormErrorComponent {
+export class FormErrorComponent implements OnChanges {
   @Input() control!: AbstractControl | FormControl | null;
   @Input() errorMessages: { [key: string]: string } = {};
 
-  // Error message keys for translation
+  private translateService = inject(TranslateService);
+
   private errorMessageKeys: { [key: string]: string } = {
     required: 'ERRORS.REQUIRED',
     email: 'ERRORS.EMAIL',
@@ -23,7 +24,11 @@ export class FormErrorComponent {
     emailMismatch: 'ERRORS.EMAIL_MISMATCH'
   };
 
-  constructor(private translateService: TranslateService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['control'] && this.control) {
+      // Możemy tu dodać dodatkową logikę jeśli potrzeba
+    }
+  }
 
   shouldShowErrors(): boolean {
     return this.control ? this.control.invalid && (this.control.dirty || this.control.touched) : false;
@@ -34,12 +39,10 @@ export class FormErrorComponent {
     
     return Object.keys(this.control.errors)
       .map(errorKey => {
-        // Use custom error message if provided
         if (this.errorMessages[errorKey]) {
           return this.errorMessages[errorKey];
         }
         
-        // Use translated message
         const translationKey = this.errorMessageKeys[errorKey] || `ERRORS.${errorKey.toUpperCase()}`;
         return this.translateService.instant(translationKey);
       });

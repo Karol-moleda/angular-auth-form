@@ -33,6 +33,7 @@
     "REQUIRED": "This field is required",
     "EMAIL": "Please enter a valid email",
     "INVALID_EMAIL": "Please enter a valid email address",
-    "EMAIL_MISMATCH": "Emails do not match"
+    "EMAIL_MISMATCH": "Emails do not match",
+    "MINLENGTH": "Minimum length up to 6 characters"
   }
 }

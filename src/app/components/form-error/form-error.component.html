@@ -1,5 +1,5 @@
-<div class="error-container" *ngIf="shouldShowErrors()">
-  <div class="error-message" *ngFor="let error of getErrorList()">
+<div *ngIf="shouldShowErrors()" class="error-container">
+  <div *ngFor="let error of getErrorList()" class="error-message">
     {{ error }}
   </div>
 </div>

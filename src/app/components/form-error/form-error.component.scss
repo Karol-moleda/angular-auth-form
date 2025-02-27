@@ -1,11 +1,13 @@
-@use '../../../../assets/styles/variables' as *;
-@use '../../../../assets/styles/mixins' as *;
+@use '../../../assets/styles/variables' as *;
+@use '../../../assets/styles/mixins' as *;
 
 .error-container {
   margin-top: -$spacing-sm;
   margin-bottom: $spacing-sm;
   
   .error-message {
-    @include error-message;
+    color: $error;
+    font-size: 12px;
+    margin-bottom: 4px;
   }
 }

@@ -48,6 +48,15 @@ export class LoginComponent implements OnInit {
       validators: this.matchEmails('email', 'patternEmail')
     });
 
+    this.loginForm.get('email')?.valueChanges.subscribe(() => {
+      if (this.loginForm.get('patternEmail')?.value) {
+        this.loginForm.get('patternEmail')?.updateValueAndValidity();
+      }
+    });
+
+    this.loginForm.get('patternEmail')?.valueChanges.subscribe(() => {
+      this.loginForm.updateValueAndValidity();
+    });
   }
 
   matchEmails(email: string, confirmEmail: string) {
@@ -55,17 +64,19 @@ export class LoginComponent implements OnInit {
       const emailControl = formGroup.controls[email];
       const confirmEmailControl = formGroup.controls[confirmEmail];
 
-      if (confirmEmailControl.errors && !confirmEmailControl.errors['emailMismatch']) {
+      if (!confirmEmailControl.value) {
         return;
       }
 
       if (emailControl.value !== confirmEmailControl.value) {
-        confirmEmailControl.setErrors({ emailMismatch: true });
-      } else {
-        confirmEmailControl.setErrors(null);
+        confirmEmailControl.setErrors({ ...confirmEmailControl.errors, emailMismatch: true });
+      } else if (confirmEmailControl.errors?.['emailMismatch']) {
+        const { emailMismatch, ...otherErrors } = confirmEmailControl.errors;
+        confirmEmailControl.setErrors(Object.keys(otherErrors).length ? otherErrors : null);
       }
     };
   }
+
 
   onSubmit(): void {
     if (this.loginForm.valid) {
@@ -73,7 +84,19 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('authToken', token);
       
       this.router.navigate(['/home']);
+    } else {
+      this.markFormGroupTouched(this.loginForm);
     }
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 
   /**

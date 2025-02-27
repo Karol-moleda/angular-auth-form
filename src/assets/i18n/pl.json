@@ -33,6 +33,7 @@
     "REQUIRED": "To pole jest wymagane",
     "EMAIL": "Wprowadź poprawny adres email",
     "INVALID_EMAIL": "Wprowadź poprawny adres email",
-    "EMAIL_MISMATCH": "Adresy email nie są zgodne"
+    "EMAIL_MISMATCH": "Adresy email nie są zgodne",
+    "MINLENGTH": "Minimalna długość to 6 znaków"
   }
 }
