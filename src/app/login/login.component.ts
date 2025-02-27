@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormErrorComponent } from "./components/form-error/form-error.component";
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,9 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    FormErrorComponent
+    FormErrorComponent,
+    TranslateModule,
+    LanguageSelectorComponent
 ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

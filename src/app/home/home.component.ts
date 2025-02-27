@@ -13,6 +13,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.interface';
 import { Subscription } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,9 @@ import { Subscription } from 'rxjs';
     MatListModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    TranslateModule,
+    LanguageSelectorComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

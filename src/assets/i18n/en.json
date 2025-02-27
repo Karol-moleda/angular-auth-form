@@ -1,0 +1,38 @@
+{
+  "HOME": {
+    "TITLE": "AppVerk Dashboard",
+    "WELCOME": "Welcome, {{name}}!",
+    "LOGOUT": "Logout",
+    "LOADING": "Loading user data...",
+    "ERROR": "An error occurred",
+    "RETRY": "Try again",
+    "AUTH_INFO": "You are authenticated with a secure token",
+    "PERSONAL_DATA": "Personal Data",
+    "FULL_NAME": "Full name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "COMPANY": "Company",
+    "DEPARTMENT": "Department",
+    "POSITION": "Position",
+    "ADDRESS": "Address",
+    "SKILLS": "Skills",
+    "ROLE": "Role"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "Email address",
+    "CONFIRM_EMAIL": "Confirm your email",
+    "PASSWORD": "Password",
+    "BUTTON": "Login"
+  },
+  "WELCOME": {
+    "TITLE": "Recruitment Task",
+    "LOGIN_BUTTON": "Login"
+  },
+  "ERRORS": {
+    "REQUIRED": "This field is required",
+    "EMAIL": "Please enter a valid email",
+    "INVALID_EMAIL": "Please enter a valid email address",
+    "EMAIL_MISMATCH": "Emails do not match"
+  }
+}

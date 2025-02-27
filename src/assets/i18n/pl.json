@@ -1,0 +1,38 @@
+{
+  "HOME": {
+    "TITLE": "Panel AppVerk",
+    "WELCOME": "Witaj, {{name}}!",
+    "LOGOUT": "Wyloguj",
+    "LOADING": "Ładowanie danych użytkownika...",
+    "ERROR": "Wystąpił błąd",
+    "RETRY": "Spróbuj ponownie",
+    "AUTH_INFO": "Jesteś uwierzytelniony za pomocą bezpiecznego tokena",
+    "PERSONAL_DATA": "Dane osobowe",
+    "FULL_NAME": "Pełne imię",
+    "EMAIL": "Email",
+    "PHONE": "Telefon",
+    "COMPANY": "Firma",
+    "DEPARTMENT": "Dział",
+    "POSITION": "Stanowisko",
+    "ADDRESS": "Adres",
+    "SKILLS": "Umiejętności",
+    "ROLE": "Rola"
+  },
+  "LOGIN": {
+    "TITLE": "Zaloguj się",
+    "EMAIL": "Adres Email",
+    "CONFIRM_EMAIL": "Potwierdź swój e-mail",
+    "PASSWORD": "Hasło",
+    "BUTTON": "Zaloguj"
+  },
+  "WELCOME": {
+    "TITLE": "Zadanie rekrutacyjne",
+    "LOGIN_BUTTON": "Zaloguj się"
+  },
+  "ERRORS": {
+    "REQUIRED": "To pole jest wymagane",
+    "EMAIL": "Wprowadź poprawny adres email",
+    "INVALID_EMAIL": "Wprowadź poprawny adres email",
+    "EMAIL_MISMATCH": "Adresy email nie są zgodne"
+  }
+}

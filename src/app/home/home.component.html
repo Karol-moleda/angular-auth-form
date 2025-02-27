@@ -1,17 +1,18 @@
 <div class="home">
   <mat-toolbar color="primary" class="home__header">
-    <span>AppVerk Dashboard</span>
+    <span>{{ 'HOME.TITLE' | translate }}</span>
     <span class="home__spacer"></span>
+    <app-language-selector></app-language-selector>
     <button mat-button (click)="logout()" class="home__logout-button">
       <mat-icon>logout</mat-icon>
-      Wyloguj
+      {{ 'HOME.LOGOUT' | translate }}
     </button>
   </mat-toolbar>
 
   <div class="home__content">
     <div *ngIf="isLoading" class="home__loading">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="home__loading-text">Ładowanie danych użytkownika...</p>
+      <p class="home__loading-text">{{ 'HOME.LOADING' | translate }}</p>
     </div>
 
     <mat-card *ngIf="!isLoading && errorMessage" class="home__error-card">
@@ -25,7 +26,7 @@
             (click)="loadUserData()"
             class="home__retry-button"
           >
-            Spróbuj ponownie
+            {{ 'HOME.RETRY' | translate }}
           </button>
         </div>
       </mat-card-content>
@@ -39,7 +40,9 @@
               <img [src]="userData.avatar" alt="Profile picture" class="home__avatar" />
             </div>
             <div class="home__welcome-text">
-              <h1 class="home__welcome-title">Witaj, {{ userData.firstName }}!</h1>
+              <h1 class="home__welcome-title">
+                {{ 'HOME.WELCOME' | translate:{ name: userData.firstName } }}
+              </h1>
               <div class="home__role-badge">
                 <mat-icon class="home__role-icon">badge</mat-icon>
                 <span class="home__role-text">{{ userData.role }}</span>
@@ -49,55 +52,51 @@
 
           <div class="home__auth-info">
             <mat-icon class="home__secure-icon">security</mat-icon>
-            <span class="home__auth-text"
-              >Jesteś uwierzytelniony za pomocą bezpiecznego tokena</span
-            >
+            <span class="home__auth-text">{{ 'HOME.AUTH_INFO' | translate }}</span>
           </div>
         </mat-card-content>
       </mat-card>
 
       <mat-card class="home__card home__details-card">
         <mat-card-header>
-          <mat-card-title class="home__card-title">Dane osobowe</mat-card-title>
+          <mat-card-title class="home__card-title">{{ 'HOME.PERSONAL_DATA' | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="home__details-grid">
             <div class="home__detail-item">
-              <span class="home__detail-label">Pełne imię</span>
-              <span class="home__detail-value"
-                >{{ userData.firstName }} {{ userData.lastName }}</span
-              >
+              <span class="home__detail-label">{{ 'HOME.FULL_NAME' | translate }}</span>
+              <span class="home__detail-value">{{ userData.firstName }} {{ userData.lastName }}</span>
             </div>
 
             <div class="home__detail-item">
-              <span class="home__detail-label">Email</span>
+              <span class="home__detail-label">{{ 'HOME.EMAIL' | translate }}</span>
               <span class="home__detail-value">{{ userData.email }}</span>
             </div>
 
             <div class="home__detail-item">
-              <span class="home__detail-label">Telefon</span>
+              <span class="home__detail-label">{{ 'HOME.PHONE' | translate }}</span>
               <span class="home__detail-value">{{ userData.phone }}</span>
             </div>
 
             <div class="home__detail-item">
-              <span class="home__detail-label">Firma</span>
+              <span class="home__detail-label">{{ 'HOME.COMPANY' | translate }}</span>
               <span class="home__detail-value">{{ userData.company }}</span>
             </div>
 
             <div class="home__detail-item">
-              <span class="home__detail-label">Dział</span>
+              <span class="home__detail-label">{{ 'HOME.DEPARTMENT' | translate }}</span>
               <span class="home__detail-value">{{ userData.department }}</span>
             </div>
 
             <div class="home__detail-item">
-              <span class="home__detail-label">Stanowisko</span>
+              <span class="home__detail-label">{{ 'HOME.POSITION' | translate }}</span>
               <span class="home__detail-value">{{ userData.position }}</span>
             </div>
           </div>
 
           <mat-divider class="home__divider"></mat-divider>
 
-          <h3 class="home__section-title">Adres</h3>
+          <h3 class="home__section-title">{{ 'HOME.ADDRESS' | translate }}</h3>
           <div class="home__address">
             <p class="home__address-line">{{ userData.address.street }}</p>
             <p class="home__address-line">
@@ -108,7 +107,7 @@
 
           <mat-divider class="home__divider"></mat-divider>
 
-          <h3 class="home__section-title">Umiejętności</h3>
+          <h3 class="home__section-title">{{ 'HOME.SKILLS' | translate }}</h3>
           <div class="home__skills">
             <mat-chip-set>
               <mat-chip
