@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal, inject, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,9 +12,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.interface';
-import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
+import { EMPTY, catchError, finalize } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -34,40 +35,41 @@ import { LanguageSelectorComponent } from '../components/language-selector/langu
     LanguageSelectorComponent
   ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  userData: User | null = null;
-  isLoading = false;
-  errorMessage: string | null = null;
-  subscription = new Subscription();
-  
+export class HomeComponent implements OnInit {
+  // Dependency injection using inject function
+  private readonly router = inject(Router);
+  private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  constructor(
-    private readonly router: Router,
-    private readonly userService: UserService
-  ) {}
+  // State management with signals
+  userData = signal<User | null>(null);
+  isLoading = signal(false);
+  errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
     this.loadUserData();
   }
 
   loadUserData(): void {
-    this.isLoading = true;
-    this.errorMessage = null;
-    this.subscription.add(
-      this.userService.getUserData()
-      .subscribe({
-        next: (data) => {
-          this.isLoading = false;
-          this.userData = data;
-        },
-        error: (error) => {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+    
+    this.userService.getUserData()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError(error => {
           console.error('Error in component:', error);
-          this.errorMessage = error.message || 'An unexpected error occurred';
-        }
-      })
-    )
+          this.errorMessage.set(error.message || 'An unexpected error occurred');
+          return EMPTY;
+        }),
+        finalize(() => this.isLoading.set(false))
+      )
+      .subscribe(data => {
+        this.userData.set(data);
+      });
   }
 
   logout(): void {
@@ -75,17 +77,4 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  formatDate(dateString: string): string {
-    return new Date(dateString).toLocaleString('pl-PL', {
-      year: 'numeric',
-      month: 'long', 
-      day: 'numeric',
-      hour: '2-digit', 
-      minute: '2-digit'
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }

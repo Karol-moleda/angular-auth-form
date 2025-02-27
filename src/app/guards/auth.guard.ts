@@ -1,49 +1,25 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivateFn } from '@angular/router';
+import { Router, CanActivateFn, UrlTree } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  
-  // Check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem('authToken');
-  
-  if (isAuthenticated) {
-    return true;
-  }
-  
-  // Not authenticated, redirect to login
-  router.navigate(['/login']);
-  return false;
+/**
+ * Checks if the user is authenticated
+ * @returns Boolean indicating if user is authenticated
+ */
+const isAuthenticated = (): boolean => {
+  return !!localStorage.getItem('authToken');
 };
 
-export const loginGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (): boolean | UrlTree => {
   const router = inject(Router);
-  
-  // Check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem('authToken');
-  
-  if (!isAuthenticated) {
-    return true;
-  }
-  
-  // Already authenticated, redirect to home
-  router.navigate(['/home']);
-  return false;
+  return isAuthenticated() ? true : router.createUrlTree(['/login']);
 };
 
-export const welcomeGuard: CanActivateFn = (route, state) => {
+export const loginGuard: CanActivateFn = (): boolean | UrlTree => {
   const router = inject(Router);
-  
-  // Check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem('authToken');
-  
-  if (isAuthenticated) {
-    // If authenticated, redirect to home
-    router.navigate(['/home']);
-    return false;
-  }
-  
-  // Not authenticated, allow access to welcome page
-  return true;
+  return !isAuthenticated() ? true : router.createUrlTree(['/home']);
+};
+
+export const welcomeGuard: CanActivateFn = (): boolean | UrlTree => {
+  const router = inject(Router);
+  return isAuthenticated() ? router.createUrlTree(['/home']) : true;
 };

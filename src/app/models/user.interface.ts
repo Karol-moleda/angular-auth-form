@@ -17,3 +17,9 @@ export interface User {
   phone: string;
   skills: string[];
 }
+
+
+export interface Language {
+  code: string;
+  name: string;
+}
